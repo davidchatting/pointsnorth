@@ -65,4 +65,4 @@ Based on an idea co-developed with [Edward Jenkins](https://edjenkins.co.uk).
 
 ## License
 
-All rights reserved. No license is granted to copy, modify, or redistribute this code.
+[MIT](LICENSE)
