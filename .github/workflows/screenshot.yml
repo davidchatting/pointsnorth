@@ -27,14 +27,23 @@ jobs:
 
           node .github/workflows/screenshot.js
 
+      - name: Crop a centered square version
+        run: |
+          W=$(identify -format "%w" screenshot.png)
+          H=$(identify -format "%h" screenshot.png)
+          SIDE=$((W<H?W:H))
+          XOFF=$(( (W-SIDE)/2 ))
+          YOFF=$(( (H-SIDE)/2 ))
+          convert screenshot.png -crop ${SIDE}x${SIDE}+${XOFF}+${YOFF} +repage screenshot-square.png
+
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add screenshot.png
+          git add screenshot.png screenshot-square.png
           if git diff --cached --quiet; then
             echo "No changes"
             exit 0
           fi
-          git commit -m "Regenerate screenshot.png"
+          git commit -m "Regenerate screenshot.png / screenshot-square.png"
           git push

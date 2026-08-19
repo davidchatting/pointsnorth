@@ -8,7 +8,8 @@
 // ?session=...) so the screenshot doesn't show a joinable session value. We also tilt our own
 // compass bearing so the dotted north line isn't drawn straight up, and inject four simulated
 // peers - real, current phone/tablet models, different sizes, irregular bearings - so the ring
-// shows a mixed group of devices around a table.
+// shows a mixed group of devices around a table. A centered square crop, screenshot-square.png,
+// is generated afterwards by screenshot.yml (ImageMagick, not here).
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');

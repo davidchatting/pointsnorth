@@ -12,10 +12,10 @@ This protoype currently supports two interactions:
      see .github/workflows/screenshot.js) - don't hand-edit it. -->
 <p align="center">
   <img src="screenshot.png" alt="Screenshot of the compass ring and join QR code"><br>
-  <sub>Five phones and tablets around a table, each rendering the others as a shape rotated to their real-world compass bearing.</sub>
+  <sub>A bird's-eye view of five phones and tablets around a table, each rendering the others as a shape rotated to their real-world compass bearing.</sub>
 </p>
 
-## Run
+## Server
 
 ```
 npm install
@@ -23,8 +23,6 @@ node server.js
 ```
 
 Server runs at `http://localhost:3000`.
-
-## Server
 
 `server.js` is a minimal Express + [`ws`](https://github.com/websockets/ws) WebSocket relay — it
 has no game logic of its own. Clients connect to `wss://<host>/pubgames` and join a *session* by
