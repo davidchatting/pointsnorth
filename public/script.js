@@ -502,6 +502,55 @@ let _swStartT = 0;
 const SWIPE_MIN_DISTANCE = 50;   // px
 const SWIPE_MAX_Y_DELTA = 80;   // px vertical tolerance
 const SWIPE_MAX_TIME = 500;     // ms
+const TAP_MAX_DISTANCE = 12;    // px movement tolerance for a tap
+const TAP_MAX_TIME = 500;       // ms
+
+// hit-test a screen point against every drawn device rect, using the same
+// transform math as draw(). Returns the clientId under the point, or null.
+function hitTestDevices(px, py) {
+  const layout = _computeCompassLayout(width, height);
+  const lx = px - layout.cx;
+  const ly = py - layout.cy;
+
+  let hit = null;
+  devicesById.forEach((v, id) => {
+    if (hit || !v || typeof v.bearing !== 'number') return;
+
+    const peerW = (Number.isFinite(v.width) && v.width > 0) ? v.width : 100;
+    const peerH = (Number.isFinite(v.height) && v.height > 0) ? v.height : 100;
+    const maxPeerWH = Math.max(peerW, peerH);
+    const sPeer = Math.min(layout.deviceScale, layout.maxDim / maxPeerWH);
+    const rectH = peerH * sPeer;
+    const radialCenter = layout.basePos + (rectH * 0.5);
+
+    const thetaDeg = (Number.isFinite(currentBearing) ? -currentBearing : 0) + v.bearing + 180;
+    const theta = radians(thetaDeg);
+    const cosT = Math.cos(theta), sinT = Math.sin(theta);
+
+    // inverse-rotate the tap point, then undo the translate and scale
+    const rx = lx * cosT + ly * sinT;
+    const ry = -lx * sinT + ly * cosT;
+    const sx = rx / sPeer;
+    const sy = (ry + radialCenter) / sPeer;
+
+    if (Math.abs(sx) <= peerW / 2 && Math.abs(sy) <= peerH / 2) {
+      hit = id;
+    }
+  });
+
+  return hit;
+}
+
+function handleDeviceTap(x, y) {
+  const targetId = hitTestDevices(x, y);
+  if (!targetId) return;
+  appendConsole(`👆 Tapped device: ${targetId}`);
+  send({
+    type: 'message',
+    text: 'Tapped!',
+    targetClientId: targetId
+  });
+}
 
 function onSwipeLeft() {
   appendConsole('↩️ Swipe left', getDeviceLeft());
@@ -536,12 +585,16 @@ function _handleSwipeEnd(endX, endY) {
   _swStartX = _swStartY = null;
   _swStartT = 0;
 
-  if (dt > SWIPE_MAX_TIME) return;           // too slow
-  if (Math.abs(dy) > SWIPE_MAX_Y_DELTA) return; // too vertical
-  if (Math.abs(dx) < SWIPE_MIN_DISTANCE) return; // too short
+  if (dt <= SWIPE_MAX_TIME && Math.abs(dy) <= SWIPE_MAX_Y_DELTA && Math.abs(dx) >= SWIPE_MIN_DISTANCE) {
+    if (dx > 0) onSwipeLeft();
+    else onSwipeRight();
+    return;
+  }
 
-  if (dx > 0) onSwipeLeft();
-  else onSwipeRight();
+  // not a swipe — treat as a tap if the touch/click barely moved
+  if (dt <= TAP_MAX_TIME && Math.hypot(dx, dy) <= TAP_MAX_DISTANCE) {
+    handleDeviceTap(endX, endY);
+  }
 }
 
 function mousePressed() {
