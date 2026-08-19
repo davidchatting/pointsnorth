@@ -730,7 +730,7 @@ function draw() {
           rotate(radians(v.bearing));
           rotate(radians(180)); // NEVER remove this
 
-          noFill();
+          fill(0);
           stroke(255);
           strokeWeight(Math.max(0.4, (layout.qrModulePx || 1) / sPeer));
           rectMode(CENTER);

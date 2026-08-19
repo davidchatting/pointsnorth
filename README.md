@@ -1,13 +1,19 @@
 # Points North — games for round tables
 
+An experimental platform for multiplayer games around round tables.
+
 <!-- screenshot.png is regenerated on every push to main by
      .github/workflows/screenshot.yml (headless Chromium via Playwright,
      see .github/workflows/screenshot.js) - don't hand-edit it. -->
 <p align="center">
-  <a href="http://davidchatting.com/pointsnorth/"><img src="screenshot.png" alt="Screenshot of the compass ring and join QR code"></a>
+  <img src="screenshot.png" alt="Screenshot of the compass ring and join QR code"><br>
+  <sub>Five phones and tablets around a table, each rendering the others as a shape rotated to their real-world compass bearing.</sub>
 </p>
 
-An experimental platform for multiplayer games around round tables.
+The clever part: no device is a central display, and there's no calibration step. Each phone only
+knows its own compass bearing — but by sharing that one number over the relay, every device
+independently draws everyone else in the right place around the table, turning whatever hardware
+people already have in their pockets into a shared, spatially-aware surface.
 
 ## Run
 
