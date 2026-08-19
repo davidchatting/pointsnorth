@@ -1,6 +1,6 @@
-# Points North — games around round tables
+# Points North — for games around tables
 
-An experimental platform for multiplayer games around round tables. When you're sat around in a circle, with your phone in front of you, simply comparing the compass bearing can tell your position in the circle. Points North starts to explore what interactions are then possible. To try it visit http://davidchatting.com/pointsnorth/, enable the compass, and show the QR code to your friends. Will work with any modern smartphone or tablet with a compass.
+An experimental platform games around tables, with friends. When you're sat around a table, with your phone in front of you, simply comparing compass bearings tells your position in the circle. Points North starts to explore what interactions are then possible. To try it visit http://davidchatting.com/pointsnorth/, enable the compass, and show the QR code to your friends. Points North should work with any modern smartphone or tablet, with a compass.
 
 This prototype currently supports two interactions:
 
@@ -14,19 +14,17 @@ This prototype currently supports two interactions:
      see .github/workflows/screenshot.js) - don't hand-edit it. -->
 <p align="center">
   <img src="screenshot.png" alt="Screenshot of the Points North game"><br>
-  <sub>The Points North game: a bird's-eye view of five phones and tablets around a table, each rendering the others as a shape rotated to their real-world compass bearing.</sub>
+  <sub>The *game* shows a bird's-eye view of the phones and tablets around the table.</sub>
 </p>
 
-`public/` is a single-page [p5.js](https://p5js.org) sketch (`script.js`) that draws a compass
+The *game* is a [p5.js](https://p5js.org) sketch (`script.js`) that draws a compass
 ring: your own device sits at the centre, and every other device in the session appears as a
-rectangle scaled to their screen size and rotated to their real-world compass bearing (via
+rectangle scaled to their screen size and rotated to their real-world position (calculated from the
 `deviceorientation`) — so a group of phones and tablets round a table shows up as a matching ring
-of shapes pointing the right way. On load it generates (or reads from the URL) a `sessionId` and
-displays it as a QR code; scanning it opens the same session URL on another device, which then
-appears as a new shape in the ring.
+of shapes pointing the right way. The first device will generate a unique `sessionId` that is then shared via the QR code displayed on screen.
 
 This is meant as a reusable base — session/client plumbing, the bearing-ordered device list, and
-the WebSocket relay — for building actual round-table games on top of.
+the WebSocket relay — for building actual round-table games on top of - consider the card game [Bang!](https://en.wikipedia.org/wiki/Bang!_(card_game))
 
 ## Server
 
@@ -35,7 +33,7 @@ npm install
 node server.js
 ```
 
-Server runs at `http://localhost:3000`.
+The server then runs at `http://localhost:3000`.
 
 `server.js` is a minimal Express + [`ws`](https://github.com/websockets/ws) WebSocket relay — it
 has no game logic of its own. Clients connect to `wss://<host>/pubgames` and join a *session* by
@@ -56,4 +54,4 @@ Based on an idea co-developed with [Edward Jenkins](https://edjenkins.co.uk).
 
 ## License
 
-[MIT](LICENSE)
+This code is licensed under the [MIT License](LICENSE).
