@@ -1,4 +1,4 @@
-# Pubgames
+# Points North — games for round tables
 
 A simple Node.js server (Express + WebSocket) for multiplayer pub game interactions between devices.
 

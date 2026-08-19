@@ -1,5 +1,5 @@
 {
-  "name": "pubgames",
+  "name": "points-north",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   "keywords": [],
   "author": "",
   "license": "UNLICENSED",
-  "description": "",
+  "description": "Points North — games for round tables",
   "dependencies": {
     "express": "^5.1.0",
     "ws": "^8.18.3"
