@@ -1,4 +1,4 @@
-# Points North — games for round tables
+# Points North — games around round tables
 
 An experimental platform for multiplayer games around round tables.
 
