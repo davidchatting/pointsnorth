@@ -7,8 +7,7 @@
   <a href="http://davidchatting.com/pointsnorth/"><img src="screenshot.png" alt="Screenshot of the compass ring and join QR code"></a>
 </p>
 
-An experimental platform for multiplayer games around round tables, based on an idea
-co-developed with [Edward Jenkins](https://edjenkins.co.uk).
+An experimental platform for multiplayer games around round tables.
 
 ## Run
 
@@ -53,6 +52,10 @@ Interactions so far:
 
 This is meant as a reusable base — session/client plumbing, the bearing-ordered device list, and
 the WebSocket relay — for building actual round-table games on top of.
+
+## Credits
+
+Based on an idea co-developed with [Edward Jenkins](https://edjenkins.co.uk).
 
 ## License
 
