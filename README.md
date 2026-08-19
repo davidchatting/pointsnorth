@@ -1,11 +1,13 @@
 # Points North — for games around tables
 
-An experimental platform games around tables, with friends. When you're sat around a table, with your phone in front of you, simply comparing compass bearings tells your position in the circle. Points North starts to explore what interactions are then possible. To try it visit http://davidchatting.com/pointsnorth/, enable the compass, and show the QR code to your friends. Points North should work with any modern smartphone or tablet, with a compass.
+An experimental platform for games around tables, with friends. When you're sat around a table, with your phone in front of you, simply comparing compass bearings tells your position in the circle. Points North starts to explore what interactions are then possible. 
 
 This prototype currently supports two interactions:
 
 - **Tap** a device's shape to send it a `message`, flashing its screen
 - **Swipe** left/right to message whichever device is immediately to your left/right around the ring
+
+To try it visit http://davidchatting.com/pointsnorth/, enable the compass, and show the QR code to your friends. Points North should work with any modern smartphone or tablet, with a compass.
 
 ## Game
 
