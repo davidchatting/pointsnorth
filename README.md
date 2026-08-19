@@ -7,13 +7,26 @@ This protoype currently supports two interactions:
 - **Tap** a device's shape to send it a `message`, flashing its screen
 - **Swipe** left/right to message whichever device is immediately to your left/right around the ring
 
+## Webapp
+
 <!-- screenshot.png is regenerated on every push to main by
      .github/workflows/screenshot.yml (headless Chromium via Playwright,
      see .github/workflows/screenshot.js) - don't hand-edit it. -->
 <p align="center">
-  <img src="screenshot.png" alt="Screenshot of the compass ring and join QR code"><br>
-  <sub>A bird's-eye view of five phones and tablets around a table, each rendering the others as a shape rotated to their real-world compass bearing.</sub>
+  <img src="screenshot.png" alt="Screenshot of the Points North webapp"><br>
+  <sub>The Points North webapp: a bird's-eye view of five phones and tablets around a table, each rendering the others as a shape rotated to their real-world compass bearing.</sub>
 </p>
+
+`public/` is a single-page [p5.js](https://p5js.org) sketch (`script.js`) that draws a compass
+ring: your own device sits at the centre, and every other device in the session appears as a
+rectangle scaled to their screen size and rotated to their real-world compass bearing (via
+`deviceorientation`) — so a group of phones and tablets round a table shows up as a matching ring
+of shapes pointing the right way. On load it generates (or reads from the URL) a `sessionId` and
+displays it as a QR code; scanning it opens the same session URL on another device, which then
+appears as a new shape in the ring.
+
+This is meant as a reusable base — session/client plumbing, the bearing-ordered device list, and
+the WebSocket relay — for building actual round-table games on top of.
 
 ## Server
 
@@ -36,19 +49,6 @@ in the same session:
 When a client disconnects, the rest of its session receive a `disconnect` message. There's no
 persistence and no HTTP API beyond serving `public/` as static assets — each game built on top of
 this defines its own message types and client-side behaviour.
-
-## Client
-
-`public/` is a single-page [p5.js](https://p5js.org) sketch (`script.js`) that draws a compass
-ring: your own device sits at the centre, and every other device in the session appears as a
-rectangle scaled to their screen size and rotated to their real-world compass bearing (via
-`deviceorientation`) — so a group of phones and tablets round a table shows up as a matching ring
-of shapes pointing the right way. On load it generates (or reads from the URL) a `sessionId` and
-displays it as a QR code; scanning it opens the same session URL on another device, which then
-appears as a new shape in the ring.
-
-This is meant as a reusable base — session/client plumbing, the bearing-ordered device list, and
-the WebSocket relay — for building actual round-table games on top of.
 
 ## Credits
 
