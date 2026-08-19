@@ -27,13 +27,13 @@ canvas {
   top: 12px;
   left: 12px;
   z-index: 9999;
-  padding: 10px 14px;
+  padding: 30px 42px;
   background: linear-gradient(180deg,#fff,#e6e6e6);
   color: #000;
-  border: 1px solid rgba(0,0,0,0.2);
-  border-radius: 8px;
+  border: 3px solid rgba(0,0,0,0.2);
+  border-radius: 24px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 42px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.45);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;

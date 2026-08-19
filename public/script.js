@@ -140,7 +140,7 @@ function setupQRCode(url, size = 256, minVersion = 1) {
       text: url,
       minVersion: minVersion,
       size: size,
-      fill: '#FFF',
+      fill: '#999',
       back: 'transparent',
       quiet: 1
     });
@@ -415,6 +415,9 @@ function setupCompass() {
       // ensure listeners are actually installed after permission
       installOrientationListener();
       appendConsole('🧭 Compass enabled');
+
+      const btn = document.getElementById('enableCompassBtn');
+      if (btn) btn.style.display = 'none';
     } catch (err) {
       appendConsole('❌ Error requesting permission: ' + err);
     }
@@ -649,9 +652,9 @@ function draw() {
     // dotted north line — draw only between the inner and outer radius
     push();
       stroke(255);
-      const d = layout.desiredStroke
-      strokeWeight(d);
-      drawingContext.setLineDash([d, d*2]);
+      const dashLen = layout.qrModulePx || 2;
+      strokeWeight(layout.desiredStroke);
+      drawingContext.setLineDash([dashLen, dashLen*2]);
       line(0, -layout.innerRadius, 0, -layout.outerRadius);
       drawingContext.setLineDash([]);
     pop();
