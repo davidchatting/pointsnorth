@@ -16,7 +16,7 @@ To try it visit http://davidchatting.com/pointsnorth/, enable the compass, and s
      see .github/workflows/screenshot.js) - don't hand-edit it. -->
 <p align="center">
   <img src="screenshot.png" alt="Screenshot of the Points North game"><br>
-  <sub>The *game* shows a bird's-eye view of the phones and tablets around the table.</sub>
+  <sub>The game shows a bird's-eye view of the phones and tablets around the table.</sub>
 </p>
 
 The *game* is a [p5.js](https://p5js.org) sketch (`script.js`) that draws a compass
