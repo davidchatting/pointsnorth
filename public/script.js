@@ -632,7 +632,7 @@ function draw() {
   push();
     noFill();
     stroke(255);
-    strokeWeight(layout.qrModulePx || 1); // use QR module size or default
+    strokeWeight(layout.desiredStroke); // use device outline weight
     // draw so stroke is centered on outerRadius: use circle diameter = (outerRadius * 2)
     circle(0, 0, layout.outerRadius * 2);
   pop();
@@ -649,7 +649,7 @@ function draw() {
     // dotted north line — draw only between the inner and outer radius
     push();
       stroke(255);
-      const d = layout.qrModulePx || 2
+      const d = layout.desiredStroke
       strokeWeight(d);
       drawingContext.setLineDash([d, d*2]);
       line(0, -layout.innerRadius, 0, -layout.outerRadius);
@@ -676,7 +676,7 @@ function draw() {
 
           noFill();
           stroke(255);
-          strokeWeight(Math.max(0.4, layout.desiredStroke / sPeer));
+          strokeWeight(Math.max(0.4, (layout.qrModulePx || 1) / sPeer));
           rectMode(CENTER);
 
           push();
