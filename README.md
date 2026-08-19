@@ -1,6 +1,13 @@
 # Points North — games for round tables
 
-A simple Node.js server (Express + WebSocket) for multiplayer pub game interactions between devices.
+<!-- screenshot.png is regenerated on every push to main by
+     .github/workflows/screenshot.yml (headless Chromium via Playwright,
+     see .github/workflows/screenshot.js) - don't hand-edit it. -->
+<p align="center">
+  <a href="http://davidchatting.com/pointsnorth/"><img src="screenshot.png" alt="Screenshot of the compass ring and join QR code"></a>
+</p>
+
+An experimental platform for multiplayer games around round tables.
 
 ## Run
 
