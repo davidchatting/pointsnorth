@@ -1,6 +1,11 @@
 # Points North — games around round tables
 
-An experimental platform for multiplayer games around round tables.
+An experimental platform for multiplayer games around round tables. When you're sat around in a circle, with your phone in front of you, simply comparing the compass bearing can tell your position in the circle. Points North starts to explorte what interactions are then possible. To try it visit http://davidchatting.com/pointsnorth/, enable the compass, and show the QR code to your friends. Will work with any modern smartphone or tablet with a compass.
+
+This protoype currently supports two interactions:
+
+- **Tap** a device's shape to send it a `message`, flashing its screen
+- **Swipe** left/right to message whichever device is immediately to your left/right around the ring
 
 <!-- screenshot.png is regenerated on every push to main by
      .github/workflows/screenshot.yml (headless Chromium via Playwright,
@@ -9,11 +14,6 @@ An experimental platform for multiplayer games around round tables.
   <img src="screenshot.png" alt="Screenshot of the compass ring and join QR code"><br>
   <sub>Five phones and tablets around a table, each rendering the others as a shape rotated to their real-world compass bearing.</sub>
 </p>
-
-The clever part: no device is a central display, and there's no calibration step. Each phone only
-knows its own compass bearing — but by sharing that one number over the relay, every device
-independently draws everyone else in the right place around the table, turning whatever hardware
-people already have in their pockets into a shared, spatially-aware surface.
 
 ## Run
 
@@ -48,13 +48,6 @@ rectangle scaled to their screen size and rotated to their real-world compass be
 of shapes pointing the right way. On load it generates (or reads from the URL) a `sessionId` and
 displays it as a QR code; scanning it opens the same session URL on another device, which then
 appears as a new shape in the ring.
-
-Interactions so far:
-
-- **Tap** a device's shape to send it a `message`, flashing its screen
-- **Swipe** left/right to message whichever device is immediately to your left/right around the ring
-- A Screen Wake Lock keeps the display on; an "Enable Compass" button requests iOS's motion-sensor
-  permission and hides itself once granted
 
 This is meant as a reusable base — session/client plumbing, the bearing-ordered device list, and
 the WebSocket relay — for building actual round-table games on top of.
