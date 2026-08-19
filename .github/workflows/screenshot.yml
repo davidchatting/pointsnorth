@@ -20,18 +20,12 @@ jobs:
         with:
           node-version: 20
 
-      - name: Regenerate screenshot.png from the demo
+      - name: Regenerate screenshot.png from the live demo
         run: |
           npm install --no-save playwright@1.47.0
           npx playwright install --with-deps chromium
 
-          python3 -m http.server 8099 --directory public &
-          SERVER_PID=$!
-          timeout 30 bash -c 'until curl -sf http://localhost:8099/ >/dev/null; do sleep 1; done'
-
-          node .github/workflows/screenshot.js http://localhost:8099/
-
-          kill $SERVER_PID
+          node .github/workflows/screenshot.js
 
       - name: Commit if changed
         run: |
