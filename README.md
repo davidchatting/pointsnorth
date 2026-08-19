@@ -1,20 +1,20 @@
 # Points North — games around round tables
 
-An experimental platform for multiplayer games around round tables. When you're sat around in a circle, with your phone in front of you, simply comparing the compass bearing can tell your position in the circle. Points North starts to explorte what interactions are then possible. To try it visit http://davidchatting.com/pointsnorth/, enable the compass, and show the QR code to your friends. Will work with any modern smartphone or tablet with a compass.
+An experimental platform for multiplayer games around round tables. When you're sat around in a circle, with your phone in front of you, simply comparing the compass bearing can tell your position in the circle. Points North starts to explore what interactions are then possible. To try it visit http://davidchatting.com/pointsnorth/, enable the compass, and show the QR code to your friends. Will work with any modern smartphone or tablet with a compass.
 
-This protoype currently supports two interactions:
+This prototype currently supports two interactions:
 
 - **Tap** a device's shape to send it a `message`, flashing its screen
 - **Swipe** left/right to message whichever device is immediately to your left/right around the ring
 
-## Webapp
+## Game
 
 <!-- screenshot.png is regenerated on every push to main by
      .github/workflows/screenshot.yml (headless Chromium via Playwright,
      see .github/workflows/screenshot.js) - don't hand-edit it. -->
 <p align="center">
-  <img src="screenshot.png" alt="Screenshot of the Points North webapp"><br>
-  <sub>The Points North webapp: a bird's-eye view of five phones and tablets around a table, each rendering the others as a shape rotated to their real-world compass bearing.</sub>
+  <img src="screenshot.png" alt="Screenshot of the Points North game"><br>
+  <sub>The Points North game: a bird's-eye view of five phones and tablets around a table, each rendering the others as a shape rotated to their real-world compass bearing.</sub>
 </p>
 
 `public/` is a single-page [p5.js](https://p5js.org) sketch (`script.js`) that draws a compass
