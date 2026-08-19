@@ -6,19 +6,25 @@
 // The page's own natural first load always encodes a real random session in the QR (by design,
 // so a scan can actually join) - we regenerate the QR afterwards from the bare page URL (no
 // ?session=...) so the screenshot doesn't show a joinable session value. We also tilt our own
-// compass bearing so the dotted north line isn't drawn straight up, and inject two simulated
-// peers - different sizes, irregular bearings - so the ring shows phones around a table.
+// compass bearing so the dotted north line isn't drawn straight up, and inject four simulated
+// peers - real, current phone/tablet models, different sizes, irregular bearings - so the ring
+// shows a mixed group of devices around a table.
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 
 const DEMO_URL = process.argv[2] || 'https://davidchatting.com/pointsnorth/';
 const OUT_PATH = path.join(__dirname, '..', '..', 'screenshot.png'); // repo root, two levels up from .github/workflows/
-const PHONE_VIEWPORT = { width: 390, height: 844 }; // iPhone-ish portrait ratio
 const OWN_BEARING = 35; // degrees - so the dotted north line isn't drawn straight up
+
+// approximate CSS portrait viewport sizes (px) for the five devices shown in the group.
+// our own capture viewport is one of them (iPhone 15); the rest are simulated peers.
+const PHONE_VIEWPORT = { width: 393, height: 852 }; // iPhone 15
 const PEERS = [
-  { clientId: 'demo-peer-1', bearing: 95, width: 360, height: 780 },
-  { clientId: 'demo-peer-2', bearing: 260, width: 430, height: 932 },
+  { clientId: 'iphone-15-pro-max', bearing: 80, width: 430, height: 932 },  // iPhone 15 Pro Max
+  { clientId: 'galaxy-s24', bearing: 140, width: 360, height: 780 },        // Samsung Galaxy S24
+  { clientId: 'pixel-8-pro', bearing: 205, width: 412, height: 915 },       // Google Pixel 8 Pro
+  { clientId: 'ipad-mini', bearing: 300, width: 744, height: 1133 },        // iPad mini (6th gen)
 ];
 
 (async () => {
@@ -47,7 +53,7 @@ const PEERS = [
     });
   }, OWN_BEARING);
 
-  // simulate two other phones around the table - different sizes, irregular spacing
+  // simulate four other phones/tablets around the table - different sizes, irregular spacing
   await page.evaluate((peers) => {
     for (const peer of peers) upsertDevice(peer);
   }, PEERS);
